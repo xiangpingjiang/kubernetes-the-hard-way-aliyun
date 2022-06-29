@@ -129,3 +129,11 @@ resource "alicloud_ecs_instance_set" "instance_set" {
 #     encrypted   = true
 #   }
 # }
+
+data "alicloud_instances" "instances_ds" {
+  status     = "Running"
+}
+output "instances" {
+  value =  [for instance in data.alicloud_instances.instances_ds.instances :
+  "${instance.public_ip},${instance.private_ip}"]
+}
