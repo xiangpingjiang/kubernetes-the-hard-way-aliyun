@@ -131,7 +131,8 @@ resource "alicloud_ecs_instance_set" "instance_set" {
 # }
 
 data "alicloud_instances" "instances_ds" {
-  status     = "Running"
+  # status     = "Running"
+  name_regex = "test_foo"
 }
 output "instances" {
   value =  [for instance in data.alicloud_instances.instances_ds.instances :
